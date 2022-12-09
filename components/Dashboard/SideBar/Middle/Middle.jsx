@@ -1,7 +1,13 @@
 import React from "react";
 
+import Search from "./Search/Search";
+
 const Middle = () => {
-  return <div>Middle</div>;
+  return (
+    <section className="bg-black flex flex-col flex-grow py-6 justify-center">
+      <Search></Search>
+    </section>
+  );
 };
 
 export default Middle;

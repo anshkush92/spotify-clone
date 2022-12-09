@@ -11,7 +11,7 @@ import { MdAddBox } from "react-icons/md";
 
 const Left = () => {
   return (
-    <section className="w-56 fixed z-40 bg-black/100 text-[#7D7D7D] h-screen top-0 flex flex-col px-4 gap-y-4">
+    <section className="w-56 fixed z-40 bg-black/100 text-[#7D7D7D] h-screen top-0 flex flex-col px-4 gap-y-4 sm:flex-shrink">
       <div className="flex flex-row items-center w-fit cursor-pointer justify-start h-20 -ml-2.5 pt-4 gap-x-2">
         <Image
           src="https://res.cloudinary.com/dicbnntfh/image/upload/v1670563310/spotify-clone/spotify_s1tqqq.png"

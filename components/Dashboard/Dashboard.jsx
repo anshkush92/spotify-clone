@@ -8,8 +8,8 @@ const Dashboard = () => {
   return (
     <main>
       <Left></Left>
-      {/* <Middle></Middle>
-      <Right></Right> */}
+      <Middle></Middle>
+      {/* <Right></Right> */}
     </main>
   );
 };
