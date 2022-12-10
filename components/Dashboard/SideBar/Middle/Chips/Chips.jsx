@@ -13,7 +13,7 @@ const chips = [
 
 const Chips = () => {
   return (
-    <div className="flex flex-row gap-x-2">
+    <div className="grid xs:grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-2">
       {chips.map((chip, index) => (
         <button key={index} className="chip">
           {chip}
