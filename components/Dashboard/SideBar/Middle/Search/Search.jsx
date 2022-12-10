@@ -28,7 +28,7 @@ const Search = () => {
   };
 
   return (
-    <div className="ml-60 flex flex-col justify-center items-start gap-y-5">
+    <div className="flex flex-col justify-start items-start gap-y-5">
       <div className="w-96 flex bg-white rounded-full items-center xs:max-w-full px-2.5">
         <AiOutlineSearch size={30}></AiOutlineSearch>
         <input

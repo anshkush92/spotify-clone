@@ -31,7 +31,7 @@
   }
 
   .chip {
-    @apply cursor-default text-white text-[15px] px-3 py-1 bg-[#2A2A2A] rounded-full hover:bg-[#3b3b3b] border-transparent focus:border-transparent focus:ring-0 outline-none focus:bg-[#F6F6F6] focus:text-black font-medium;
+    @apply cursor-default text-white text-[15px] px-3 py-1 bg-[#2A2A2A] rounded-full hover:bg-[#3b3b3b] border-transparent focus:border-transparent focus:ring-0 outline-none focus:bg-[#F6F6F6] focus:text-black font-[600];
   }
 }
 
