@@ -26,12 +26,12 @@ const Left = () => {
       <Desktop icon={<AiOutlineSearch></AiOutlineSearch>}>Search</Desktop>
       <Desktop icon={<BiLibrary></BiLibrary>}>Your Library</Desktop>
 
-      <hr className="bg-[#7d7d7d] border-transparent"></hr>
+      <hr className="divider"></hr>
 
       <Desktop icon={<MdAddBox></MdAddBox>}>Create Playlist</Desktop>
       <Desktop icon={<AiTwotoneHeart></AiTwotoneHeart>}>Liked Songs</Desktop>
 
-      <hr className="bg-[#7d7d7d] border-transparent"></hr>
+      <hr className="divider"></hr>
 
       <Playlist></Playlist>
       <InstallApp></InstallApp>
