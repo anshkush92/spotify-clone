@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 import { getProviders, useSession, signIn } from "next-auth/react";
 
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loader/Loader";
 
 // Receving the providers as props at the request time
 const Signin = ({ providers }) => {
