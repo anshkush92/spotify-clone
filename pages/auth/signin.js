@@ -1,16 +1,34 @@
-import React from "react";
+import { useEffect } from "react";
 
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { getProviders, useSession, signIn } from "next-auth/react";
+
+import Loader from "../../components/Loader";
 
 // Receving the providers as props at the request time
 const Signin = ({ providers }) => {
   const { data: session, status } = useSession();
+  const router = useRouter();
+
+  /*
+   * If the user is logged in, then redirect to the home page, otherwise show the <Loader>
+   * when checking the session
+   * useEffect() runs only when [session] is changed
+   */
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
+
+  // If the session is being checked / user is already logged in , then show the <Loader> instead of showing the login screen
+  if (session) return <Loader></Loader>;
 
   return (
-    <div>
+    <div className="flex flex-col absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 gap-y-10 items-center">
       <Head>
         <title>Login - Spotify</title>
         <meta
@@ -21,8 +39,8 @@ const Signin = ({ providers }) => {
       </Head>
 
       <Image
-        src="https://res.cloudinary.com/dicbnntfh/image/upload/v1670737521/spotify-clone/spotify2019-830x350_f5k157.jpg"
-        width={250}
+        src="https://res.cloudinary.com/dicbnntfh/image/upload/v1670752383/spotify-clone/Spotify_Logo_RGB_White_azxdbj.png"
+        width={350}
         height={600}
         alt="Spotify Logo for the Login Screen"
         className="animate-pulse object-contain"
@@ -32,7 +50,7 @@ const Signin = ({ providers }) => {
         <div key={provider.name}>
           <button
             onClick={() => signIn(provider.id)}
-            className="text-white py-4 px-6 rounded-full bg-[#1db954] transition duration-300 ease-out border border-transparent uppercase font-bold text-xs md:text-base tracking-wider hover:scale-105 hover:bg-[#0db146]"
+            className="text-black py-4 px-6 rounded-full bg-[#85E164] transition duration-300 ease-out border border-transparent uppercase font-bold text-xs md:text-base tracking-wider hover:scale-105 hover:bg-[#87e465]"
           >
             Sign in with {provider.name}
           </button>
