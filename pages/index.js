@@ -4,10 +4,12 @@ import { useSession } from "next-auth/react";
 import Dashboard from "../components/Dashboard/Dashboard";
 import Loader from "../components/Loader/Loader";
 
+// Don't forget to add the redirect URI to the spotify developer dashboard, otherwise you won't be able to login with spoitfy
+
 const Home = () => {
   const router = useRouter();
 
-  const { status } = useSession({
+  const { status, data: session } = useSession({
     // If the user is not authenticated, then redirect to the login page
     onUnauthenticated() {
       router.push("/auth/signin");
@@ -16,6 +18,8 @@ const Home = () => {
 
   // Meaning the user is not logged in or is being logged in
   if (status === "loading") return <Loader></Loader>;
+
+  // console.log(session);
 
   // Returned only when the user is logged in
   return (
