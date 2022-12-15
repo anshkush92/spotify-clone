@@ -13,18 +13,21 @@ const Common = ({ data, children, type }) => {
       ({ id, previewUrl, album, image, name, artist, duration }) => (
         <a key={id} href={previewUrl} target="_blank" rel="noreferrer">
           <div className="card-container">
-            <img
-              src={image}
-              width={150}
-              height={150}
-              style={{
-                borderRadius: "6px",
-                objectFit: "contain",
-                width: "100%",
-                height: "100%",
-              }}
-              alt={album || name}
-            ></img>
+            <div>
+              <img
+                src={image}
+                width={150}
+                height={150}
+                style={{
+                  borderRadius: "6px",
+                  objectFit: "contain",
+                  width: "100%",
+                  height: "100%",
+                }}
+                alt={album || name}
+              ></img>
+            </div>
+
             <div className="card-desc-container">
               <div className="w-[calc(100%)] truncate font-bold">{name}</div>
               <div className="w-[calc(100%)] truncate text-[#85E164]">
@@ -41,18 +44,20 @@ const Common = ({ data, children, type }) => {
     typePlaylists = data.map(({ id, owner, image, name, tracks, uri }) => (
       <a key={id} href={uri} target="_blank" rel="noreferrer">
         <div key={id} className="card-container">
-          <img
-            src={image}
-            width={150}
-            height={150}
-            style={{
-              borderRadius: "6px",
-              objectFit: "contain",
-              width: "100%",
-              height: "100%",
-            }}
-            alt={name}
-          ></img>
+          <div>
+            <img
+              src={image}
+              width={150}
+              height={150}
+              style={{
+                borderRadius: "6px",
+                objectFit: "contain",
+                width: "100%",
+                height: "100%",
+              }}
+              alt={name}
+            ></img>
+          </div>
 
           <div className="card-desc-container">
             <div className="w-[calc(100%)] truncate font-bold">{name}</div>
