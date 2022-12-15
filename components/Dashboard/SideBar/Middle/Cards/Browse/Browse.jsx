@@ -1,9 +1,6 @@
 import React from "react";
 
 import Image from "next/image";
-import Link from "next/link";
-
-const test = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
 const Browse = ({ categories }) => {
   return (
@@ -23,7 +20,7 @@ const Browse = ({ categories }) => {
               right: "0",
               transform: "rotate(25deg) translate(18%,-2%)",
             }}
-            alt="2022 Spotify Wrapped"
+            alt={name}
           ></Image>
           <div className="text-2xl font-[600]">{name}</div>
         </div>
