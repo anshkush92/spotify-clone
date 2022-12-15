@@ -1,19 +1,20 @@
 import React from "react";
 
 import Image from "next/image";
+import Link from "next/link";
 
 const test = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
-const Browse = () => {
+const Browse = ({ categories }) => {
   return (
     <div className="grid-container">
-      {test.map((item, index) => (
+      {categories?.map(({ name, image }, index) => (
         <div
           key={index}
           className="text-white p-4 h-44 rounded-md bg-purple-400 relative overflow-hidden"
         >
           <Image
-            src="https://wrapped-images.spotifycdn.com/image/browse-card/wrapped-temp-card.jpg"
+            src={image}
             width={100}
             height={100}
             style={{
@@ -24,7 +25,7 @@ const Browse = () => {
             }}
             alt="2022 Spotify Wrapped"
           ></Image>
-          <div className="text-2xl font-[600]">Podcasts</div>
+          <div className="text-2xl font-[600]">{name}</div>
         </div>
       ))}
     </div>
