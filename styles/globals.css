@@ -28,6 +28,10 @@
     @apply bg-[#7d7d7d] w-full ring-0 border-transparent;
   }
 
+  .card-title {
+    @apply text-white text-2xl font-bold;
+  }
+
   .scrollbar::-webkit-scrollbar {
     width: 10px;
     height: 5px;

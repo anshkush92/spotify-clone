@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["res.cloudinary.com", "wrapped-images.spotifycdn.com"],
+    domains: [
+      "res.cloudinary.com",
+      "wrapped-images.spotifycdn.com",
+      "t.scdn.co",
+      "i.scdn.co",
+    ],
   },
 };
 
