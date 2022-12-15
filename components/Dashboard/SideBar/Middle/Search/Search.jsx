@@ -13,6 +13,7 @@ const Search = (props) => {
     setSearchResults,
     setSearchPlaylists,
     setSearchArtists,
+    setNewRelease,
   } = props;
 
   const { data: session } = useSession();
@@ -109,6 +110,27 @@ const Search = (props) => {
         console.log(error);
       }
     );
+
+    spotifyApi.getNewReleases().then(
+      (response) => {
+        console.log(response);
+        setNewRelease(
+          response.body.albums.items?.map((newRelease) => {
+            return {
+              name: newRelease.name,
+              id: newRelease.id,
+              image: newRelease.images[0]?.url,
+              uri: newRelease.external_urls?.spotify,
+              duration: newRelease.duration_ms,
+              album: newRelease.album,
+            };
+          })
+        );
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }, [
     search,
     accessToken,
@@ -116,6 +138,7 @@ const Search = (props) => {
     setSearchResults,
     setSearchPlaylists,
     setSearchArtists,
+    setNewRelease,
   ]);
 
   return (

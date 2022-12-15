@@ -19,6 +19,7 @@ const Dashboard = () => {
   const { accessToken } = session;
 
   const [userPlaylist, setUserPlaylist] = useState([]);
+
   console.log(`User Playlist`, userPlaylist);
 
   // useEffect() runs every time the accessToken otherwise, will get error from the spotify API
