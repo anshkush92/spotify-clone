@@ -9,10 +9,6 @@ import Browse from "./Cards/Browse/Browse";
 import Home from "./Cards/Home/Home";
 
 const Middle = ({ spotifyApi, setUserPlaylist }) => {
-  const { data: session } = useSession();
-  // Similar to the API key, need for the Spotify to make request to its API
-  const { accessToken } = session;
-
   // State for managing the search in the input bar
   const [search, setSearch] = useState("");
 
@@ -20,13 +16,6 @@ const Middle = ({ spotifyApi, setUserPlaylist }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchArtists, setSearchArtists] = useState([]);
   const [searchPlaylists, setSearchPlaylists] = useState([]);
-
-  // useEffect() runs every time the accessToken changes as it is mentioned in the dependency array
-  useEffect(() => {
-    if (!accessToken) return;
-    // Setting the access token to the spotifyApi instance, otherwise it will not work
-    spotifyApi.setAccessToken(accessToken);
-  }, [accessToken, spotifyApi]);
 
   // Only need to run 1 time, when the component is mounted
   useEffect(() => {
@@ -69,11 +58,11 @@ const Middle = ({ spotifyApi, setUserPlaylist }) => {
 
       {search && (
         <>
-          <Common data={searchPlaylists} type="playlists">
-            Playlists
-          </Common>
           <Common data={searchResults} type="tracks">
             Tracks
+          </Common>
+          <Common data={searchPlaylists} type="playlists">
+            Playlists
           </Common>
           <Artist data={searchArtists}></Artist>
           <Home></Home>

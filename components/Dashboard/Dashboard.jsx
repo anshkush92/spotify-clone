@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 import Left from "./SideBar/Left/Left";
 import Middle from "./SideBar/Middle/Middle";
@@ -14,9 +15,19 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const Dashboard = () => {
-  const [userPlaylist, setUserPlaylist] = useState([]);
+  const { data: session } = useSession();
+  // Similar to the API key, need for the Spotify to make request to its API
+  const { accessToken } = session;
 
+  const [userPlaylist, setUserPlaylist] = useState([]);
   console.log(`User Playlist`, userPlaylist);
+
+  // useEffect() runs every time the accessToken otherwise, will get error from the spotify API
+  useEffect(() => {
+    if (!accessToken) return;
+    // Setting the access token to the spotifyApi instance, otherwise it will not work
+    spotifyApi.setAccessToken(accessToken);
+  }, [accessToken]);
 
   return (
     <main>
