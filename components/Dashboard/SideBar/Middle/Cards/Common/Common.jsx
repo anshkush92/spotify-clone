@@ -1,10 +1,20 @@
 import React from "react";
 
+import { useRecoilState } from "recoil";
+import {
+  playingTrackState,
+  playState,
+} from "../../../../../../atoms/playerAtom";
+
 import convertTime from "../../../../../../utils/convertTime";
 
 /* eslint-disable @next/next/no-img-element */
 
 const Common = ({ data, children, type }) => {
+  // *Importing the playState from the Recoil and descructuring it similar to useState
+  const [play, setPlay] = useRecoilState(playState);
+  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
+
   let typeTracks, typePlaylists;
 
   if (type === "tracks") {

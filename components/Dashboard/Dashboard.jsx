@@ -3,7 +3,6 @@ import { useSession } from "next-auth/react";
 
 import Left from "./SideBar/Left/Left";
 import Middle from "./SideBar/Middle/Middle";
-import Right from "./SideBar/Right/Right";
 
 import SpotifyWebApi from "spotify-web-api-node";
 
@@ -36,7 +35,6 @@ const Dashboard = () => {
         spotifyApi={spotifyApi}
         setUserPlaylist={setUserPlaylist}
       ></Middle>
-      {/* <Right></Right> */}
     </main>
   );
 };
