@@ -1,20 +1,19 @@
 import React from "react";
-import Image from "next/image";
 
 import convertTime from "../../../../../../utils/convertTime";
 
-const Common = ({ data, children, type }) => {
-  console.log(data);
+/* eslint-disable @next/next/no-img-element */
 
+const Common = ({ data, children, type }) => {
   let typeTracks, typePlaylists;
 
   if (type === "tracks") {
     // Mapping of the data for the Tracks / Songs Sections
     typeTracks = data.map(
       ({ id, previewUrl, album, image, name, artist, duration }) => (
-        <a key={id} href={previewUrl}>
-          <div className="bg-[#202020] hover:bg-[#282828] cursor-pointer flex flex-col gap-y-2 p-4 rounded-md">
-            <Image
+        <a key={id} href={previewUrl} target="_blank" rel="noreferrer">
+          <div className="card-container">
+            <img
               src={image}
               width={150}
               height={150}
@@ -25,10 +24,12 @@ const Common = ({ data, children, type }) => {
                 height: "100%",
               }}
               alt={album || name}
-            ></Image>
-            <div className="flex flex-col justify-center items-start">
-              <div className="w-[calc(100%)] truncate">{name}</div>
-              <div>{artist}</div>
+            ></img>
+            <div className="card-desc-container">
+              <div className="w-[calc(100%)] truncate font-bold">{name}</div>
+              <div className="w-[calc(100%)] truncate text-[#85E164]">
+                {artist}
+              </div>
               <div>Duration : {convertTime(duration)}</div>
             </div>
           </div>
@@ -37,37 +38,38 @@ const Common = ({ data, children, type }) => {
     );
   } else if (type === "playlists") {
     // Mapping of the data for the Playlists Section
-    typePlaylists = data.map(({ id, owner, image, name, tracks }) => (
-      <div
-        key={id}
-        className="bg-[#202020] hover:bg-[#282828] cursor-pointer flex flex-col gap-y-2 p-4 rounded-md"
-      >
-        <Image
-          src={image}
-          width={150}
-          height={150}
-          style={{
-            borderRadius: "6px",
-            objectFit: "contain",
-            width: "100%",
-            height: "100%",
-          }}
-          alt={name}
-        ></Image>
+    typePlaylists = data.map(({ id, owner, image, name, tracks, uri }) => (
+      <a key={id} href={uri} target="_blank" rel="noreferrer">
+        <div key={id} className="card-container">
+          <img
+            src={image}
+            width={150}
+            height={150}
+            style={{
+              borderRadius: "6px",
+              objectFit: "contain",
+              width: "100%",
+              height: "100%",
+            }}
+            alt={name}
+          ></img>
 
-        <div className="flex flex-col justify-center items-start">
-          <div className="w-[calc(100%)] truncate">{name}</div>
-          <div>By {owner}</div>
-          <div>Tracks : {tracks}</div>
+          <div className="card-desc-container">
+            <div className="w-[calc(100%)] truncate font-bold">{name}</div>
+            <div className="w-[calc(100%)] truncate">
+              By <span className="text-[#85E164]">{owner}</span>
+            </div>
+            <div>Tracks : {tracks}</div>
+          </div>
         </div>
-      </div>
+      </a>
     ));
   }
 
   return (
     <>
       <p className="card-title">{children}</p>
-      <div className="w-full text-white grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-7 h-100">
+      <div className="grid-container">
         {type === "tracks" ? typeTracks : typePlaylists}
       </div>
     </>

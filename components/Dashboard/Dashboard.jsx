@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 import Left from "./SideBar/Left/Left";
 import Middle from "./SideBar/Middle/Middle";
@@ -14,10 +14,17 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const Dashboard = () => {
+  const [userPlaylist, setUserPlaylist] = useState([]);
+
+  console.log(`User Playlist`, userPlaylist);
+
   return (
     <main>
-      <Left></Left>
-      <Middle></Middle>
+      <Left userPlaylist={userPlaylist}></Left>
+      <Middle
+        spotifyApi={spotifyApi}
+        setUserPlaylist={setUserPlaylist}
+      ></Middle>
       {/* <Right></Right> */}
     </main>
   );

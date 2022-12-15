@@ -8,7 +8,7 @@ import Artist from "./Cards/Artist/Artist";
 import Browse from "./Cards/Browse/Browse";
 import Home from "./Cards/Home/Home";
 
-const Middle = ({ spotifyApi }) => {
+const Middle = ({ spotifyApi, setUserPlaylist }) => {
   const { data: session } = useSession();
   // Similar to the API key, need for the Spotify to make request to its API
   const { accessToken } = session;
@@ -18,6 +18,7 @@ const Middle = ({ spotifyApi }) => {
 
   // State for managing the search results and using them in the Middle
   const [searchResults, setSearchResults] = useState([]);
+  const [searchArtists, setSearchArtists] = useState([]);
   const [searchPlaylists, setSearchPlaylists] = useState([]);
 
   // useEffect() runs every time the accessToken changes as it is mentioned in the dependency array
@@ -27,8 +28,31 @@ const Middle = ({ spotifyApi }) => {
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken, spotifyApi]);
 
+  // Only need to run 1 time, when the component is mounted
+  useEffect(() => {
+    // Getting the playlist of the Current user
+    spotifyApi.getUserPlaylists().then(
+      (response) => {
+        console.log(response.body);
+        setUserPlaylist(
+          response.body.items.map((userPlaylist) => {
+            return {
+              name: userPlaylist.name,
+              id: userPlaylist.id,
+              image: userPlaylist.images[0]?.url,
+              uri: userPlaylist.external_urls?.spotify,
+            };
+          })
+        );
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }, [spotifyApi, setUserPlaylist]);
+
   // To check whether we are getting the correct results or not from the spotify API
-  console.log(`Query ${search}`, searchResults, searchPlaylists);
+  console.log(`Query ${search}`, searchResults, searchPlaylists, searchArtists);
 
   return (
     <section className="ml-60 flex flex-col flex-grow py-6 justify-center gap-y-8 items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]">
@@ -38,14 +62,21 @@ const Middle = ({ spotifyApi }) => {
         setSearch={setSearch}
         setSearchResults={setSearchResults}
         setSearchPlaylists={setSearchPlaylists}
+        setSearchArtists={setSearchArtists}
       ></Search>
 
       {!search && <Browse categories={searchResults}></Browse>}
+
       {search && (
         <>
+          <Common data={searchPlaylists} type="playlists">
+            Playlists
+          </Common>
+          <Common data={searchResults} type="tracks">
+            Tracks
+          </Common>
+          <Artist data={searchArtists}></Artist>
           <Home></Home>
-          <Artist></Artist>
-          <Common></Common>
         </>
       )}
       <hr className="divider"></hr>

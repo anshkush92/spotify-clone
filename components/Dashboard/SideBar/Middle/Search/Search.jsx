@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
@@ -10,10 +10,9 @@ const Search = (props) => {
     spotifyApi,
     search,
     setSearch,
-    searchResults,
-    searchPlaylists,
     setSearchResults,
     setSearchPlaylists,
+    setSearchArtists,
   } = props;
 
   const { data: session } = useSession();
@@ -53,18 +52,38 @@ const Search = (props) => {
             return {
               id: track.id,
               name: track.name,
-              artist: track.artists[0].name,
-              album: track.album.name,
-              image: track.album.images[0].url,
-              uri: track.uri,
+              artist: track.artists[0]?.name,
+              album: track.album?.name,
+              image: track.album.images[0]?.url,
               duration: track.duration_ms,
-              previewUrl: track.preview_url,
+              previewUrl: track?.preview_url,
             };
           })
         );
       },
       (error) => {
         console.log(error);
+      }
+    );
+
+    // Using the promises to search for Artists
+    spotifyApi.searchArtists(search).then(
+      (response) => {
+        setSearchArtists(
+          response.body.artists.items.map((artist) => {
+            return {
+              id: artist.id,
+              name: artist.name,
+              image: artist.images[0]?.url,
+              followers: artist.followers?.total,
+              artistProfile: artist.external_urls?.spotify,
+              genres: artist.genres,
+            };
+          })
+        );
+      },
+      (err) => {
+        console.log(err);
       }
     );
 
@@ -77,10 +96,11 @@ const Search = (props) => {
             return {
               id: playlist.id,
               name: playlist.name,
-              image: playlist.images[0].url,
-              uri: playlist.uri,
-              tracks: playlist.tracks.total,
-              owner: playlist.owner.display_name,
+              image: playlist.images[0]?.url,
+              uri: playlist.external_urls?.spotify,
+              tracks: playlist.tracks?.total,
+              owner: playlist.owner?.display_name,
+              ownerProfile: playlist.owner.external_urls?.spotify,
             };
           })
         );
@@ -89,7 +109,14 @@ const Search = (props) => {
         console.log(error);
       }
     );
-  }, [search, accessToken, spotifyApi, setSearchResults, setSearchPlaylists]);
+  }, [
+    search,
+    accessToken,
+    spotifyApi,
+    setSearchResults,
+    setSearchPlaylists,
+    setSearchArtists,
+  ]);
 
   return (
     <div className="flex flex-col justify-start items-start gap-y-5">
@@ -116,11 +143,7 @@ const Search = (props) => {
         )}
       </div>
 
-      {search ? (
-        <Chips></Chips>
-      ) : (
-        <p className="text-white text-2xl font-bold">Browse Genres</p>
-      )}
+      {search ? <Chips></Chips> : <p className="card-title">Browse Genres</p>}
     </div>
   );
 };
