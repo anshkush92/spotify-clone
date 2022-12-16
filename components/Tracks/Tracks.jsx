@@ -16,7 +16,7 @@ const Tracks = ({ data, children }) => {
           <div className="font-bold">Duration</div>
         </div>
 
-        <div className="col-span-4 mb-1">
+        <div className="col-span-4 mb-2">
           <hr className="divider"></hr>
         </div>
 
@@ -31,15 +31,15 @@ const Tracks = ({ data, children }) => {
                     <div className="flex flex-row gap-x-5 grow">
                       <img src={image} alt={name} className="w-12 h-12"></img>
                       <div className="flex flex-col items-start justify-center">
-                        <span className="">{name}</span>
-                        <span className="text-sm text-[#636567] group-hover:text-[#8BEB6B]">
+                        <span className="truncate">{name}</span>
+                        <span className="text-sm text-[#636567] group-hover:text-[#8BEB6B] truncate">
                           {artist}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className=" col-span-3">{album}</div>
+                  <div className=" col-span-3 truncate">{album}</div>
                   <div className="">{convertTime(duration)}</div>
                 </div>
               </a>
