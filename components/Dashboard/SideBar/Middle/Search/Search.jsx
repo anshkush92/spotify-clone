@@ -166,7 +166,7 @@ const Search = (props) => {
         )}
       </div>
 
-      {search ? <Chips></Chips> : <p className="card-title">Browse Genres</p>}
+      {search && <Chips></Chips>}
     </div>
   );
 };

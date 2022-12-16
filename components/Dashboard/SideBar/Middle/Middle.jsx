@@ -51,7 +51,11 @@ const Middle = ({ spotifyApi, setUserPlaylist }) => {
   );
 
   return (
-    <section className="ml-60 flex flex-col flex-grow py-6 justify-center gap-y-8 items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]">
+    <section
+      className={`ml-60 flex flex-col flex-grow py-6 justify-center ${
+        search ? "gap-y-5" : "gap-y-8"
+      } items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]`}
+    >
       <PlayPause></PlayPause>
       <Search
         spotifyApi={spotifyApi}
@@ -64,7 +68,6 @@ const Middle = ({ spotifyApi, setUserPlaylist }) => {
       ></Search>
 
       <Tracks></Tracks>
-
       {!search && <Browse categories={searchResults}></Browse>}
 
       {search && (
