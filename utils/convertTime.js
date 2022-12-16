@@ -1,5 +1,5 @@
 // https://stackoverflow.com/a/32180863
-const msToTime = (ms) => {
+const convertTime = (ms) => {
   let seconds = (ms / 1000).toFixed(1);
   let minutes = (ms / (1000 * 60)).toFixed(1);
   let hours = (ms / (1000 * 60 * 60)).toFixed(1);
@@ -10,4 +10,4 @@ const msToTime = (ms) => {
   else return days + " Days";
 };
 
-export default msToTime;
+export default convertTime;
