@@ -119,10 +119,11 @@ const Search = (props) => {
             return {
               name: newRelease.name,
               id: newRelease.id,
+              artistName: newRelease.artists[0]?.name,
               image: newRelease.images[0]?.url,
               uri: newRelease.external_urls?.spotify,
-              duration: newRelease.duration_ms,
-              album: newRelease.album,
+              totalTracks: newRelease.total_tracks,
+              releaseDate: newRelease.release_date,
             };
           })
         );

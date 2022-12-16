@@ -24,6 +24,10 @@
     @apply bg-[#202020] hover:bg-[#282828] cursor-pointer flex flex-col gap-y-2 p-4 rounded-md hover:scale-105 transition duration-200 ease-in-out h-full w-full;
   }
 
+  .track {
+    @apply w-full grid grid-cols-10 items-center content-center gap-x-10  hover:font-bold hover:bg-[#3B3B3B] p-1 rounded-md transition-all duration-200 ease-in-out;
+  }
+
   .card-title {
     @apply text-white text-2xl font-bold;
   }

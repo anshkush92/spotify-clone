@@ -67,7 +67,7 @@ const Middle = ({ spotifyApi, setUserPlaylist }) => {
         setNewRelease={setNewRelease}
       ></Search>
 
-      <Tracks></Tracks>
+      <Tracks data={newRelease}></Tracks>
       {!search && <Browse categories={searchResults}></Browse>}
 
       {search && (
