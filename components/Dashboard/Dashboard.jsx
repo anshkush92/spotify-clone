@@ -14,6 +14,7 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const Dashboard = () => {
+  console.log(`Session, why`, useSession());
   const { data: session } = useSession();
   // Similar to the API key, need for the Spotify to make request to its API
   const { accessToken } = session;
