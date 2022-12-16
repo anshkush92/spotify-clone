@@ -22,14 +22,27 @@ const Left = ({ userPlaylist }) => {
         <span className="text-2xl text-white">Spotify</span>
       </div>
 
-      <Desktop icon={<AiFillHome></AiFillHome>}>Home</Desktop>
-      <Desktop icon={<AiOutlineSearch></AiOutlineSearch>}>Search</Desktop>
-      <Desktop icon={<BiLibrary></BiLibrary>}>Your Library</Desktop>
+      <Desktop icon={<AiFillHome></AiFillHome>} navLink="/">
+        Home
+      </Desktop>
+      <Desktop icon={<AiOutlineSearch></AiOutlineSearch>} navLink="/search">
+        Search
+      </Desktop>
+      <Desktop icon={<BiLibrary></BiLibrary>} navLink="/collection">
+        Your Library
+      </Desktop>
 
       <hr className="divider"></hr>
 
-      <Desktop icon={<MdAddBox></MdAddBox>}>Create Playlist</Desktop>
-      <Desktop icon={<AiTwotoneHeart></AiTwotoneHeart>}>Liked Songs</Desktop>
+      <Desktop icon={<MdAddBox></MdAddBox>} navLink="/playlist">
+        Create Playlist
+      </Desktop>
+      <Desktop
+        icon={<AiTwotoneHeart></AiTwotoneHeart>}
+        navLink="/collection/tracks"
+      >
+        Liked Songs
+      </Desktop>
 
       <hr className="divider"></hr>
 
