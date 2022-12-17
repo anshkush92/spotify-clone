@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 
 import PlayerProvider from "../providers/PlayerProvider";
+import SpotifyApiDataProvider from "../providers/SpotifyApiDataProvider";
+import SpotifyApiProvider from "../providers/SpotifyApiProvider";
 
 // Passing the session to the pageProps object
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -9,9 +11,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   return (
     <SessionProvider session={session}>
-      <PlayerProvider>
-        <Component {...pageProps} />;
-      </PlayerProvider>
+      <SpotifyApiProvider>
+        <SpotifyApiDataProvider>
+          <PlayerProvider>
+            <Component {...pageProps} />;
+          </PlayerProvider>
+        </SpotifyApiDataProvider>
+      </SpotifyApiProvider>
     </SessionProvider>
   );
 }

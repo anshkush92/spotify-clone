@@ -17,6 +17,8 @@ const SpotifyApiProvider = ({ children }) => {
   const { data: session } = useSession();
   // Similar to the API key, need for the Spotify to make request to its API
   const accessToken = session?.accessToken;
+  // For getting the user
+  const user = session?.user;
 
   // useEffect() runs every time the accessToken otherwise, will get error from the spotify API
   useEffect(() => {
@@ -26,7 +28,7 @@ const SpotifyApiProvider = ({ children }) => {
   }, [accessToken]);
 
   return (
-    <SpotifyApi.Provider value={{ accessToken, spotifyApi }}>
+    <SpotifyApi.Provider value={{ accessToken, spotifyApi, user }}>
       {children}
     </SpotifyApi.Provider>
   );

@@ -1,24 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { useSession } from "next-auth/react";
 
 import Dropdown from "./Dropdown";
+import SpotifyApi from "../../context/SpotifyApi";
+import Player from "../../context/Player";
 
 /* eslint-disable @next/next/no-img-element */
 const Profile = () => {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-
-  const { data: session } = useSession();
-  const { user } = session;
-  console.log(session);
+  // For getting the User's Profile from the Spotify API using Context API
+  const { user } = useContext(SpotifyApi);
   const { id, name, image, email } = user;
+
+  // For toggling the Dropdown
+  const { isProfileOpen, toggleProfileDropdown } = useContext(Player);
 
   return (
     <div className="text-white relative">
       <button
         className="bg-[#373636] rounded-full h-8"
-        onClick={() => setIsProfileOpen((previousState) => !previousState)}
+        onClick={toggleProfileDropdown}
       >
         <div className="flex flex-row items-center justify-start gap-x-2 px-1">
           <img
@@ -42,7 +43,7 @@ const Profile = () => {
         </div>
       </button>
       {isProfileOpen && (
-        <Dropdown closeProfile={setIsProfileOpen} userId={id}></Dropdown>
+        <Dropdown closeProfile={toggleProfileDropdown} userId={id}></Dropdown>
       )}
     </div>
   );

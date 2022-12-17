@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
+import SpotifyApi from "../../../../context/SpotifyApi";
 
 import Search from "./Search/Search";
 import Common from "./Cards/Common/Common";
@@ -7,7 +9,10 @@ import Browse from "./Cards/Browse/Browse";
 import Home from "./Cards/Home/Home";
 import Tracks from "../../../Tracks/Tracks";
 
-const Middle = ({ spotifyApi, setUserPlaylist }) => {
+const Middle = ({ setUserPlaylist }) => {
+  // For getting the spotify APi from the context store
+  const { spotifyApi } = useContext(SpotifyApi);
+
   // State for managing the search in the input bar
   const [search, setSearch] = useState("");
 
@@ -56,7 +61,6 @@ const Middle = ({ spotifyApi, setUserPlaylist }) => {
       } items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]`}
     >
       <Search
-        spotifyApi={spotifyApi}
         search={search}
         setSearch={setSearch}
         setSearchResults={setSearchResults}

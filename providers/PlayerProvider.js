@@ -9,6 +9,9 @@ const PlayerProvider = ({ children }) => {
   // State for the liked songs
   const [isLiked, setIsLiked] = useState(false);
 
+  // State for the User Profile Drop Down
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   // Create a function to toggle the play/pause button
   const togglePlaying = () => {
     console.log(isPlaying ? "Pause" : "Play");
@@ -21,10 +24,24 @@ const PlayerProvider = ({ children }) => {
     setIsLiked((previousState) => !previousState);
   };
 
+  // Create a function to toggle the User Profile Drop Down
+  const toggleProfileDropdown = () => {
+    setIsProfileOpen((previousState) => !previousState);
+  };
+
   // value = {{}} reprsent the the states that we wanna share
   // Using the context provider to share the states to the children
   return (
-    <Player.Provider value={{ isPlaying, isLiked, togglePlaying, toggleLiked }}>
+    <Player.Provider
+      value={{
+        isPlaying,
+        isLiked,
+        isProfileOpen,
+        togglePlaying,
+        toggleLiked,
+        toggleProfileDropdown,
+      }}
+    >
       {children}
     </Player.Provider>
   );

@@ -1,14 +1,16 @@
-import { useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useEffect, useContext } from "react";
 
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 
 import Chips from "../Chips/Chips";
 import Profile from "../../../../Profile/Profile";
+import SpotifyApi from "../../../../../context/SpotifyApi";
 
 const Search = (props) => {
+  // Context API for getting the SPOTIFY API and the ACCESS TOKEN
+  const { spotifyApi, accessToken } = useContext(SpotifyApi);
+
   const {
-    spotifyApi,
     search,
     setSearch,
     setSearchResults,
@@ -16,9 +18,6 @@ const Search = (props) => {
     setSearchArtists,
     setNewRelease,
   } = props;
-
-  const { data: session } = useSession();
-  const { accessToken } = session;
 
   // This useEffect() runs every time the accessToken, search or spotifyApi changes as it is mentioned in the dependency array
   useEffect(() => {
