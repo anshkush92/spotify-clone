@@ -29,6 +29,30 @@ const SpotifyApiDataProvider = ({ children }) => {
     });
   }, []);
 
+  const getUserArtists = useCallback((userArtists) => {
+    console.log("userArtists: ", userArtists);
+    dispatch({
+      type: ACTIONS.GET_USER_ARTISTS,
+      payload: { userArtists },
+    });
+  }, []);
+
+  const getUserAlbums = useCallback((userAlbums) => {
+    console.log("userAlbums: ", userAlbums);
+    dispatch({
+      type: ACTIONS.GET_USER_ALBUMS,
+      payload: { userAlbums },
+    });
+  }, []);
+
+  const getUserSongs = useCallback((userSongs) => {
+    console.log("userSongs: ", userSongs);
+    dispatch({
+      type: ACTIONS.GET_USER_SONGS,
+      payload: { userSongs },
+    });
+  }, []);
+
   const getSongs = useCallback((songs) => {
     console.log("songs: ", songs);
     dispatch({
@@ -77,6 +101,9 @@ const SpotifyApiDataProvider = ({ children }) => {
         handleSearch,
         removeSearch,
         getUserPlaylists,
+        getUserArtists,
+        getUserAlbums,
+        getUserSongs,
         getSongs,
         getArtists,
         getAlbums,

@@ -14,7 +14,14 @@ const Middle = () => {
   const { spotifyApi } = useContext(SpotifyApi);
 
   // For getting the getUserPlaylists from the context store
-  const { getUserPlaylists, search, state } = useContext(SpotifyApiData);
+  const {
+    search,
+    state,
+    getUserPlaylists,
+    getUserArtists,
+    getUserAlbums,
+    getUserSongs,
+  } = useContext(SpotifyApiData);
 
   // State for managing the search results and using them in the Middle
   const { playlists, albums } = state;
@@ -40,7 +47,79 @@ const Middle = () => {
         console.log(err);
       }
     );
-  }, [spotifyApi, getUserPlaylists]);
+
+    spotifyApi.getFollowedArtists().then(
+      (response) => {
+        console.log(
+          `Artist being followed by user`,
+          response.body.artists.items
+        );
+        getUserArtists(
+          response.body.artists.items.map((artist) => {
+            return {
+              id: artist.id,
+              name: artist.name,
+              image: artist.images[0]?.url,
+              followers: artist.followers?.total,
+              artistProfile: artist.external_urls?.spotify,
+              genres: artist.genres,
+            };
+          })
+        );
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    spotifyApi.getMySavedAlbums().then(
+      (response) => {
+        console.log(response.body);
+        getUserAlbums(
+          response.body.items.map((album) => {
+            return {
+              id: album.album.id,
+              name: album.album.name,
+              image: album.album.images[0]?.url,
+              uri: album.album.external_urls?.spotify,
+              tracks: album.album.total_tracks,
+              owner: album.album.artists[0]?.name,
+              ownerProfile: album.album.artists[0]?.external_urls?.spotify,
+            };
+          })
+        );
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    spotifyApi.getMySavedTracks().then((response) => {
+      console.log(response.body);
+      getUserSongs(
+        response.body.items.map((song) => {
+          return {
+            id: song.track.id,
+            name: song.track.name,
+            image: song.track.album.images[0]?.url,
+            uri: song.track.external_urls?.spotify,
+            artist: song.track.artists[0]?.name,
+            artistProfile: song.track.artists[0]?.external_urls?.spotify,
+            album: song.track.album.name,
+            albumProfile: song.track.album.external_urls?.spotify,
+            duration: song.track.duration_ms,
+            explicit: song.track.explicit,
+          };
+        })
+      );
+    });
+  }, [
+    spotifyApi,
+    getUserPlaylists,
+    getUserArtists,
+    getUserAlbums,
+    getUserSongs,
+  ]);
 
   return (
     <section

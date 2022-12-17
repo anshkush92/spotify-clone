@@ -1,5 +1,8 @@
 export const ACTIONS = {
   GET_USER_PLAYLISTS: "GET_USER_PLAYLISTS",
+  GET_USER_ARTISTS: "GET_USER_ARTISTS",
+  GET_USER_ALBUMS: "GET_USER_ALBUMS",
+  GET_USER_SONGS: "GET_USER_SONGS",
   GET_SONGS: "GET_SONGS",
   GET_ARTISTS: "GET_ARTISTS",
   GET_ALBUMS: "GET_ALBUMS",
@@ -9,6 +12,9 @@ export const ACTIONS = {
 
 export const initialState = {
   userPlaylists: [],
+  userArtists: [],
+  userAlbums: [],
+  userSongs: [],
   songs: [],
   artists: [],
   albums: [],
@@ -22,6 +28,12 @@ const spotifyApiDataReducer = (state, action) => {
   if (type === ACTIONS.GET_USER_PLAYLISTS) {
     //   Means copy the state and then update the userPlaylists property
     return { ...state, userPlaylists: payload.userPlaylists };
+  } else if (type === ACTIONS.GET_USER_ARTISTS) {
+    return { ...state, userArtists: payload.userArtists };
+  } else if (type === ACTIONS.GET_USER_ALBUMS) {
+    return { ...state, userAlbums: payload.userAlbums };
+  } else if (type === ACTIONS.GET_USER_SONGS) {
+    return { ...state, userSongs: payload.userSongs };
   } else if (type === ACTIONS.GET_SONGS) {
     return { ...state, songs: payload.songs };
   } else if (type === ACTIONS.GET_ARTISTS) {
