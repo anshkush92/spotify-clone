@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 
 import {
   AiOutlineHeart,
@@ -17,8 +17,12 @@ import {
 } from "react-icons/hi2";
 import ProgressBar from "./ProgressBar";
 
+import PlayPauseContext from "../../context/PlayPause";
+
 /* eslint-disable @next/next/no-img-element */
 const Player = () => {
+  const { isPlaying, togglePlaying } = useContext(PlayPauseContext);
+
   return (
     <div className="relative mt-20">
       <div className="fixed inset-x-0 bottom-0 bg-[#181818] h-20 w-full z-[60] text-gray-300">
@@ -45,8 +49,18 @@ const Player = () => {
             <div className="flex flex-row gap-x-3 text-lg items-center justify-start">
               <BsShuffle className="hover:text-[#1db954] player-icons"></BsShuffle>
               <AiFillStepBackward className="player-icons"></AiFillStepBackward>
-              <AiFillPlayCircle className="player-icons-play-pause"></AiFillPlayCircle>
-              <AiFillPauseCircle className="player-icons-play-pause"></AiFillPauseCircle>
+              {!isPlaying && (
+                <AiFillPlayCircle
+                  className="player-icons-play-pause"
+                  onClick={togglePlaying}
+                ></AiFillPlayCircle>
+              )}
+              {isPlaying && (
+                <AiFillPauseCircle
+                  className="player-icons-play-pause"
+                  onClick={togglePlaying}
+                ></AiFillPauseCircle>
+              )}
               <AiFillStepForward className="player-icons"></AiFillStepForward>
               <BsArrowRepeat className="hover:text-[#1db954]"></BsArrowRepeat>
             </div>
