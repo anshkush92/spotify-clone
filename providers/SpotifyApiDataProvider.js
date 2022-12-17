@@ -61,6 +61,14 @@ const SpotifyApiDataProvider = ({ children }) => {
     });
   }, []);
 
+  const getCategories = useCallback((categories) => {
+    console.log("categories: ", categories);
+    dispatch({
+      type: ACTIONS.GET_CATEGORIES,
+      payload: { categories },
+    });
+  }, []);
+
   return (
     <SpotifyApiData.Provider
       value={{
@@ -73,6 +81,7 @@ const SpotifyApiDataProvider = ({ children }) => {
         getArtists,
         getAlbums,
         getPlaylists,
+        getCategories,
       }}
     >
       {children}

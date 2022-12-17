@@ -4,6 +4,7 @@ export const ACTIONS = {
   GET_ARTISTS: "GET_ARTISTS",
   GET_ALBUMS: "GET_ALBUMS",
   GET_PLAYLISTS: "GET_PLAYLISTS",
+  GET_CATEGORIES: "GET_CATEGORIES",
 };
 
 export const initialState = {
@@ -12,6 +13,7 @@ export const initialState = {
   artists: [],
   albums: [],
   playlists: [],
+  categories: [],
 };
 
 const spotifyApiDataReducer = (state, action) => {
@@ -28,6 +30,8 @@ const spotifyApiDataReducer = (state, action) => {
     return { ...state, albums: payload.albums };
   } else if (type === ACTIONS.GET_PLAYLISTS) {
     return { ...state, playlists: payload.playlists };
+  } else if (type === ACTIONS.GET_CATEGORIES) {
+    return { ...state, categories: payload.categories };
   } else {
     return state;
   }
