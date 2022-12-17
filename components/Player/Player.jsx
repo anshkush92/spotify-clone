@@ -17,11 +17,12 @@ import {
 } from "react-icons/hi2";
 import ProgressBar from "./ProgressBar";
 
-import PlayPauseContext from "../../context/PlayPause";
+import PlayerContext from "../../context/Player";
 
 /* eslint-disable @next/next/no-img-element */
 const Player = () => {
-  const { isPlaying, togglePlaying } = useContext(PlayPauseContext);
+  const { isPlaying, togglePlaying, isLiked, toggleLiked } =
+    useContext(PlayerContext);
 
   return (
     <div className="relative mt-20">
@@ -39,8 +40,18 @@ const Player = () => {
               <span className="text-sm text-gray-400">Artist Name</span>
             </div>
             <div className="flex flex-row gap-x-3">
-              <AiOutlineHeart className="player-icons"></AiOutlineHeart>
-              <AiFillHeart className="player-icons"></AiFillHeart>
+              {!isLiked && (
+                <AiOutlineHeart
+                  className="player-icons"
+                  onClick={toggleLiked}
+                ></AiOutlineHeart>
+              )}
+              {isLiked && (
+                <AiFillHeart
+                  className="player-icons text-[#1db954] hover:text-[#1db954]"
+                  onClick={toggleLiked}
+                ></AiFillHeart>
+              )}
               <BsPip className="player-icons"></BsPip>
             </div>
           </div>
@@ -64,7 +75,7 @@ const Player = () => {
               <AiFillStepForward className="player-icons"></AiFillStepForward>
               <BsArrowRepeat className="hover:text-[#1db954]"></BsArrowRepeat>
             </div>
-            <div className="w-[30rem] h-[0.3rem] flex items-center gap-x-2 text-sm">
+            <div className="w-[35rem] h-[0.3rem] flex items-center gap-x-2 text-sm">
               <span>0:29</span>
               <ProgressBar></ProgressBar>
               <span>0:39</span>

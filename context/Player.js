@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
 // Create a context for the play/pause button
-const PlayPauseContext = createContext({});
+const Player = createContext({});
 
-export default PlayPauseContext;
+export default Player;

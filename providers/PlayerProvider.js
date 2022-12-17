@@ -1,10 +1,13 @@
 import { useState } from "react";
 
-import PlayPauseContext from "../context/PlayPause";
+import Player from "../context/Player";
 
-const PlayPauseProvider = ({ children }) => {
+const PlayerProvider = ({ children }) => {
   // Create a state for the play/pause button
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // State for the liked songs
+  const [isLiked, setIsLiked] = useState(false);
 
   // Create a function to toggle the play/pause button
   const togglePlaying = () => {
@@ -12,13 +15,19 @@ const PlayPauseProvider = ({ children }) => {
     setIsPlaying((previousState) => !previousState);
   };
 
+  // Create a function to toggle the liked songs
+  const toggleLiked = () => {
+    console.log(isLiked ? "Unlike" : "Like");
+    setIsLiked((previousState) => !previousState);
+  };
+
   // value = {{}} reprsent the the states that we wanna share
   // Using the context provider to share the states to the children
   return (
-    <PlayPauseContext.Provider value={{ isPlaying, togglePlaying }}>
+    <Player.Provider value={{ isPlaying, isLiked, togglePlaying, toggleLiked }}>
       {children}
-    </PlayPauseContext.Provider>
+    </Player.Provider>
   );
 };
 
-export default PlayPauseProvider;
+export default PlayerProvider;
