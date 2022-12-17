@@ -12,6 +12,7 @@ const Home = () => {
   const router = useRouter();
 
   const { status, data: session } = useSession({
+    required: true,
     // If the user is not authenticated, then redirect to the login page
     onUnauthenticated() {
       router.push("/auth/signin");
