@@ -17,8 +17,6 @@ const Search = (props) => {
     useContext(SpotifyApiData);
 
   const {
-    // search,
-    setSearch,
     setSearchResults,
     setSearchPlaylists,
     setSearchArtists,
@@ -54,7 +52,7 @@ const Search = (props) => {
     spotifyApi.searchTracks(search).then(
       (response) => {
         // Getting the results of the search from the spotify API
-        setSearchResults(
+        getSongs(
           response.body.tracks.items.map((track) => {
             return {
               id: track.id,
@@ -138,6 +136,7 @@ const Search = (props) => {
       }
     );
   }, [
+    getSongs,
     search,
     accessToken,
     spotifyApi,

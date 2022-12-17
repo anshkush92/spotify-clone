@@ -1,9 +1,14 @@
-import React from "react";
+import { useContext } from "react";
+
+import SpotifyApiData from "../../context/SpotifyApiData";
 
 import convertTime from "../../utils/convertTime";
 /* eslint-disable @next/next/no-img-element */
 
-const Tracks = ({ data, children }) => {
+const Tracks = ({ children }) => {
+  const { state } = useContext(SpotifyApiData);
+  const { songs } = state;
+
   return (
     <div className="text-white w-full">
       <span className="card-title ">{children}</span>
@@ -20,7 +25,7 @@ const Tracks = ({ data, children }) => {
           <hr className="divider"></hr>
         </div>
 
-        {data.map(
+        {songs.map(
           ({ name, image, artist, album, previewUrl, duration }, index) => {
             return (
               <a key={index} href={previewUrl} target="_blank" rel="noreferrer">

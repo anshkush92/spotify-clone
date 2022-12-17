@@ -72,7 +72,7 @@ const Middle = () => {
 
       {search && (
         <>
-          <Tracks data={searchResults}>Songs</Tracks>
+          <Tracks>Songs</Tracks>
           <Common data={newRelease} type="playlists">
             Albums
           </Common>
