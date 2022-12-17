@@ -67,7 +67,7 @@ export const authOptions = {
     // You can add more providers here
   ],
 
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 
   // Code for adding the custom login page
   pages: {
