@@ -1,9 +1,30 @@
 import Head from "next/head";
-import Image from "next/image";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+
+import Loader from "../components/Loader/Loader";
 import Dashboard from "../components/Dashboard/Dashboard";
-import styles from "../styles/Home.module.css";
+import Player from "../components/Player/Player";
+
+// Don't forget to add the redirect URI to the spotify developer dashboard, otherwise you won't be able to login with spoitfy
 
 const Home = () => {
+  const router = useRouter();
+
+  const { status, data: session } = useSession({
+    required: true,
+    // If the user is not authenticated, then redirect to the login page
+    onUnauthenticated() {
+      router.push("/auth/signin");
+    },
+  });
+
+  // Meaning the user is not logged in or is being logged in
+  if (status === "loading") return <Loader></Loader>;
+
+  // console.log(session);
+
+  // Returned only when the user is logged in
   return (
     <div>
       <Head>
@@ -13,6 +34,7 @@ const Home = () => {
       </Head>
 
       <Dashboard></Dashboard>
+      <Player></Player>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import { useContext } from "react";
 
 import Desktop from "./Navigation/Desktop";
 import Playlist from "./Playlist/Playlist";
@@ -11,7 +11,7 @@ import { MdAddBox } from "react-icons/md";
 
 const Left = () => {
   return (
-    <section className="w-56 fixed z-40 bg-black/100 text-[#7D7D7D] h-screen top-0 flex flex-col px-4 gap-y-4 sm:flex-shrink">
+    <section className="w-56 fixed z-50 bg-black/100 text-[#7D7D7D] h-screen top-0 flex flex-col px-4 gap-y-4 sm:flex-shrink">
       <div className="flex flex-row items-center w-fit cursor-pointer justify-start h-20 -ml-2.5 pt-4 gap-x-2">
         <Image
           src="https://res.cloudinary.com/dicbnntfh/image/upload/v1670563310/spotify-clone/spotify_s1tqqq.png"
@@ -22,16 +22,29 @@ const Left = () => {
         <span className="text-2xl text-white">Spotify</span>
       </div>
 
-      <Desktop icon={<AiFillHome></AiFillHome>}>Home</Desktop>
-      <Desktop icon={<AiOutlineSearch></AiOutlineSearch>}>Search</Desktop>
-      <Desktop icon={<BiLibrary></BiLibrary>}>Your Library</Desktop>
+      <Desktop icon={<AiFillHome></AiFillHome>} navLink="/">
+        Home
+      </Desktop>
+      <Desktop icon={<AiOutlineSearch></AiOutlineSearch>} navLink="/">
+        Search
+      </Desktop>
+      <Desktop icon={<BiLibrary></BiLibrary>} navLink="/collection/tracks">
+        Your Library
+      </Desktop>
 
-      <hr className="bg-[#7d7d7d] border-transparent"></hr>
+      <hr className="divider"></hr>
 
-      <Desktop icon={<MdAddBox></MdAddBox>}>Create Playlist</Desktop>
-      <Desktop icon={<AiTwotoneHeart></AiTwotoneHeart>}>Liked Songs</Desktop>
+      <Desktop icon={<MdAddBox></MdAddBox>} navLink="/playlist">
+        Create Playlist
+      </Desktop>
+      <Desktop
+        icon={<AiTwotoneHeart></AiTwotoneHeart>}
+        navLink="/collection/tracks"
+      >
+        Liked Songs
+      </Desktop>
 
-      <hr className="bg-[#7d7d7d] border-transparent"></hr>
+      <hr className="divider"></hr>
 
       <Playlist></Playlist>
       <InstallApp></InstallApp>

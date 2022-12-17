@@ -2,27 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700;800&display=swap");
+
+@layer base {
+  body {
+    @apply font-all bg-[#121212] p-0 m-0 box-border;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+/* Always a good idea to seperate the CSS properties */
 @layer utilities {
+  .chip {
+    @apply cursor-default text-white text-[15px] px-3 py-1 bg-[#2A2A2A] rounded-full hover:bg-[#3b3b3b] border-transparent focus:border-transparent focus:ring-0 outline-none focus:bg-[#F6F6F6] focus:text-black font-[600];
+  }
+
+  .grid-container {
+    @apply w-full text-white grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-7;
+  }
+
+  .card-container {
+    @apply bg-[#202020] hover:bg-[#282828] cursor-pointer flex flex-col gap-y-2 p-4 rounded-md hover:scale-105 transition duration-200 ease-in-out h-full w-full;
+  }
+
+  .track {
+    @apply w-full grid grid-cols-10 items-center content-center gap-x-10  hover:font-bold hover:bg-[#3B3B3B] p-1 rounded-md transition-all duration-200 ease-in-out;
+  }
+
+  .card-title {
+    @apply text-white text-2xl font-bold;
+  }
+
+  .card-desc-container {
+    @apply flex flex-col justify-center items-start;
+  }
+
+  .divider {
+    @apply bg-[#7d7d7d] w-full ring-0 border-transparent;
+  }
+
+  .player-icons {
+    @apply text-xl hover:text-white;
+  }
+
+  .player-icons-play-pause {
+    @apply text-4xl hover:text-white hover:scale-110 transition-all duration-200 ease-in-out;
+  }
+
   .scrollbar::-webkit-scrollbar {
+    display: none;
     width: 10px;
     height: 5px;
+  }
+
+  .scrollbar:hover::-webkit-scrollbar {
+    display: block;
   }
 
   .scrollbar::-webkit-scrollbar-track {
@@ -36,10 +69,6 @@ a {
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: hsla(0, 0%, 100%, 0.5);
-  }
-
-  .chip {
-    @apply cursor-default text-white text-[15px] px-3 py-1 bg-[#2A2A2A] rounded-full hover:bg-[#3b3b3b] border-transparent focus:border-transparent focus:ring-0 outline-none focus:bg-[#F6F6F6] focus:text-black font-medium;
   }
 }
 

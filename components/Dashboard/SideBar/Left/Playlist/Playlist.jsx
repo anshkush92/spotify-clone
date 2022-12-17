@@ -1,24 +1,22 @@
-import React from "react";
-
-const playlists = [
-  "Playlist 1",
-  "Playlist 2",
-  "Playlist 3",
-  "Playlist 4",
-  "Playlist 5",
-  "Playlist 6",
-  "Playlist 7",
-  "Playlist 8",
-  "Playlist 9",
-  "Playlist 10",
-];
+import { useContext } from "react";
+import SpotifyApiData from "../../../../../context/SpotifyApiData";
 
 const Playlist = () => {
+  const { state } = useContext(SpotifyApiData);
+  const { userPlaylists } = state;
+
   return (
-    <div className="overflow-y-scroll flex flex-col gap-y-4 text-base cursor-default scrollbar">
-      {playlists.map((playlist, index) => (
-        <div key={index} className="hover:text-white">
-          {playlist}
+    <div className="overflow-y-scroll flex flex-col gap-y-4 h-52 text-base cursor-default scrollbar truncate overflow-x-hidden">
+      {userPlaylists?.map(({ name, id, uri }) => (
+        <div key={id} className="hover:text-white">
+          <a
+            href={uri}
+            target="_blank"
+            rel="noreferrer"
+            className="focus:text-white"
+          >
+            {name}
+          </a>
         </div>
       ))}
     </div>
