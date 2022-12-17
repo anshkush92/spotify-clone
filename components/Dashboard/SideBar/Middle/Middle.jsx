@@ -18,7 +18,6 @@ const Middle = () => {
   const { getUserPlaylists, search } = useContext(SpotifyApiData);
 
   // State for managing the search results and using them in the Middle
-  const [searchResults, setSearchResults] = useState([]);
   const [searchArtists, setSearchArtists] = useState([]);
   const [searchPlaylists, setSearchPlaylists] = useState([]);
   const [newRelease, setNewRelease] = useState([]);
@@ -62,13 +61,12 @@ const Middle = () => {
       } items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]`}
     >
       <Search
-        setSearchResults={setSearchResults}
         setSearchPlaylists={setSearchPlaylists}
         setSearchArtists={setSearchArtists}
         setNewRelease={setNewRelease}
       ></Search>
 
-      {!search && <Browse categories={searchResults}></Browse>}
+      {!search && <Browse></Browse>}
 
       {search && (
         <>

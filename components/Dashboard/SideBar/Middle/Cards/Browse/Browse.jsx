@@ -1,8 +1,13 @@
-import React from "react";
+import { useContext } from "react";
+
+import SpotifyApiData from "../../../../../../context/SpotifyApiData";
 
 import Image from "next/image";
 
-const Browse = ({ categories }) => {
+const Browse = () => {
+  const { state } = useContext(SpotifyApiData);
+  const { categories } = state;
+
   return (
     <>
       <p className="card-title">Browse Genres</p>

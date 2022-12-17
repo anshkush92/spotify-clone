@@ -13,7 +13,7 @@ const Search = (props) => {
   const { spotifyApi, accessToken } = useContext(SpotifyApi);
 
   // Context API for using the function to make state changes in Spotify Data state
-  const { getSongs, search, handleSearch, removeSearch } =
+  const { getSongs, search, handleSearch, removeSearch, getCategories } =
     useContext(SpotifyApiData);
 
   const {
@@ -29,7 +29,7 @@ const Search = (props) => {
     if (!search) {
       spotifyApi.getCategories().then(
         (response) => {
-          setSearchResults(
+          getCategories(
             response.body.categories.items.map((category) => {
               return {
                 id: category.id,
@@ -136,11 +136,11 @@ const Search = (props) => {
       }
     );
   }, [
-    getSongs,
     search,
     accessToken,
     spotifyApi,
-    setSearchResults,
+    getSongs,
+    getCategories,
     setSearchPlaylists,
     setSearchArtists,
     setNewRelease,
