@@ -67,6 +67,8 @@ export const authOptions = {
     // You can add more providers here
   ],
 
+  secret: process.env.NEXTAUTH_SECRET,
+
   // Code for adding the custom login page
   pages: {
     // signIn: "/auth/signin", // *Refers to the /auth/signin.js file in the pages folder
