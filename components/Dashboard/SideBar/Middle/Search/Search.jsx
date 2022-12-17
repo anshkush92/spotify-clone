@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 
 import Chips from "../Chips/Chips";
+import Profile from "../../../../Profile/Profile";
 
 const Search = (props) => {
   const {
@@ -142,28 +143,31 @@ const Search = (props) => {
   ]);
 
   return (
-    <div className="flex flex-col justify-start items-start gap-y-5">
-      <div className="w-96 flex bg-white rounded-full items-center xs:max-w-full px-2.5">
-        <AiOutlineSearch size={30}></AiOutlineSearch>
-        <input
-          type="text"
-          className="w-full rounded-full border-transparent focus:border-transparent focus:ring-0 px-1 py-1.5 outline-none placeholder:text-[#8d8b8b] text-[15px]"
-          value={search}
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
-          placeholder="What do you want to listen to ?"
-        ></input>
-        {search && (
-          <button
-            className="cursor-default"
-            onClick={() => {
-              setSearch("");
+    <div className="flex flex-col w-full justify-start items-start gap-y-5 z-40">
+      <div className="flex items-start w-full justify-between">
+        <div className="w-96 flex bg-white rounded-full items-center xs:max-w-full px-2.5">
+          <AiOutlineSearch size={30}></AiOutlineSearch>
+          <input
+            type="text"
+            className="w-full rounded-full border-transparent focus:border-transparent focus:ring-0 px-1 py-1.5 outline-none placeholder:text-[#8d8b8b] text-[15px]"
+            value={search}
+            onChange={(event) => {
+              setSearch(event.target.value);
             }}
-          >
-            <AiOutlineClose size={30}></AiOutlineClose>
-          </button>
-        )}
+            placeholder="What do you want to listen to ?"
+          ></input>
+          {search && (
+            <button
+              className="cursor-default"
+              onClick={() => {
+                setSearch("");
+              }}
+            >
+              <AiOutlineClose size={30}></AiOutlineClose>
+            </button>
+          )}
+        </div>
+        <Profile></Profile>
       </div>
 
       {search && <Chips></Chips>}

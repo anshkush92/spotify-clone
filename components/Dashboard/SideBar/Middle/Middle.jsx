@@ -5,7 +5,6 @@ import Common from "./Cards/Common/Common";
 import Artist from "./Cards/Artist/Artist";
 import Browse from "./Cards/Browse/Browse";
 import Home from "./Cards/Home/Home";
-import PlayPause from "../../../Button/Play-Pause/PlayPause";
 import Tracks from "../../../Tracks/Tracks";
 
 const Middle = ({ spotifyApi, setUserPlaylist }) => {
@@ -56,7 +55,6 @@ const Middle = ({ spotifyApi, setUserPlaylist }) => {
         search ? "gap-y-5" : "gap-y-8"
       } items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]`}
     >
-      <PlayPause></PlayPause>
       <Search
         spotifyApi={spotifyApi}
         search={search}
