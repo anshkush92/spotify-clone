@@ -21,7 +21,7 @@ import PlayerContext from "../../context/Player";
 
 /* eslint-disable @next/next/no-img-element */
 const Player = () => {
-  const { isPlaying, togglePlaying, isLiked, toggleLiked } =
+  const { isPlaying, togglePlaying, isLiked, isMute, toggleLiked, toggleMute } =
     useContext(PlayerContext);
 
   return (
@@ -30,14 +30,14 @@ const Player = () => {
         <div className="flex flex-row items-center justify-between  w-full h-full px-4">
           <div className="flex gap-x-3 items-center">
             <img
-              src="https://res.cloudinary.com/dicbnntfh/image/upload/v1670681049/spotify-clone/playlistCover_jestk7.jpg"
+              src="https://res.cloudinary.com/dicbnntfh/image/upload/v1671297812/spotify-clone/ab67616d0000b2735b74e703d6ffb2ea16860c86_g77kjr.jpg"
               alt="Song"
               height={50}
               width={50}
             ></img>
             <div className="flex flex-col">
-              <span className="text-white">Lorem Ipsum Dialog Hello</span>
-              <span className="text-sm text-gray-400">Artist Name</span>
+              <span className="text-white">Excuses</span>
+              <span className="text-sm text-gray-400">AP Dhillon</span>
             </div>
             <div className="flex flex-row gap-x-3">
               {!isLiked && (
@@ -87,11 +87,21 @@ const Player = () => {
               <TbMicrophone2 className="player-icons"></TbMicrophone2>
               <HiOutlineQueueList className="player-icons"></HiOutlineQueueList>
               <TbDevices2 className="player-icons"></TbDevices2>
-              <HiSpeakerWave className="player-icons"></HiSpeakerWave>
-              <HiSpeakerXMark className="player-icons"></HiSpeakerXMark>
+              {!isMute && (
+                <HiSpeakerWave
+                  className="player-icons"
+                  onClick={toggleMute}
+                ></HiSpeakerWave>
+              )}
+              {isMute && (
+                <HiSpeakerXMark
+                  className="player-icons"
+                  onClick={toggleMute}
+                ></HiSpeakerXMark>
+              )}
             </div>
             <div className="w-20 h-[0.3rem]">
-              <ProgressBar></ProgressBar>
+              <ProgressBar isMute={isMute}></ProgressBar>
             </div>
           </div>
         </div>
