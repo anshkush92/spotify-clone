@@ -4,14 +4,20 @@ import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 
 import Chips from "../Chips/Chips";
 import Profile from "../../../../Profile/Profile";
+
 import SpotifyApi from "../../../../../context/SpotifyApi";
+import SpotifyApiData from "../../../../../context/SpotifyApiData";
 
 const Search = (props) => {
   // Context API for getting the SPOTIFY API and the ACCESS TOKEN
   const { spotifyApi, accessToken } = useContext(SpotifyApi);
 
+  // Context API for using the function to make state changes in Spotify Data state
+  const { getSongs, search, handleSearch, removeSearch } =
+    useContext(SpotifyApiData);
+
   const {
-    search,
+    // search,
     setSearch,
     setSearchResults,
     setSearchPlaylists,
@@ -150,18 +156,11 @@ const Search = (props) => {
             type="text"
             className="w-full rounded-full border-transparent focus:border-transparent focus:ring-0 px-1 py-1.5 outline-none placeholder:text-[#8d8b8b] text-[15px]"
             value={search}
-            onChange={(event) => {
-              setSearch(event.target.value);
-            }}
+            onChange={handleSearch}
             placeholder="What do you want to listen to ?"
           ></input>
           {search && (
-            <button
-              className="cursor-default"
-              onClick={() => {
-                setSearch("");
-              }}
-            >
+            <button className="cursor-default" onClick={removeSearch}>
               <AiOutlineClose size={30}></AiOutlineClose>
             </button>
           )}

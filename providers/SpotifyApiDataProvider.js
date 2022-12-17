@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from "react";
+import { useCallback, useReducer, useState } from "react";
 
 import SpotifyApiData from "../context/SpotifyApiData";
 
@@ -8,8 +8,18 @@ import spotifyApiDataReducer, {
 } from "../reducers/SpotifyApiDataReducer";
 
 const SpotifyApiDataProvider = ({ children }) => {
+  const [search, setSearch] = useState("");
   const [state, dispatch] = useReducer(spotifyApiDataReducer, initialState);
-  console.log(state);
+
+  console.log(`Search Value`, search, `State of the Spotify Data`, state);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const removeSearch = () => {
+    setSearch("");
+  };
 
   const getUserPlaylists = useCallback((userPlaylists) => {
     console.log("userPlaylists: ", userPlaylists);
@@ -19,42 +29,45 @@ const SpotifyApiDataProvider = ({ children }) => {
     });
   }, []);
 
-  const getSongs = (songs) => {
+  const getSongs = useCallback((songs) => {
     console.log("songs: ", songs);
     dispatch({
       type: ACTIONS.GET_SONGS,
       payload: { songs },
     });
-  };
+  }, []);
 
-  const getArtists = (artists) => {
+  const getArtists = useCallback((artists) => {
     console.log("artists: ", artists);
     dispatch({
       type: ACTIONS.GET_ARTISTS,
       payload: { artists },
     });
-  };
+  }, []);
 
-  const getAlbums = (albums) => {
+  const getAlbums = useCallback((albums) => {
     console.log("albums: ", albums);
     dispatch({
       type: ACTIONS.GET_ALBUMS,
       payload: { albums },
     });
-  };
+  }, []);
 
-  const getPlaylists = (playlists) => {
+  const getPlaylists = useCallback((playlists) => {
     console.log("playlists: ", playlists);
     dispatch({
       type: ACTIONS.GET_PLAYLISTS,
       payload: { playlists },
     });
-  };
+  }, []);
 
   return (
     <SpotifyApiData.Provider
       value={{
+        search,
         state,
+        handleSearch,
+        removeSearch,
         getUserPlaylists,
         getSongs,
         getArtists,

@@ -15,10 +15,7 @@ const Middle = () => {
   const { spotifyApi } = useContext(SpotifyApi);
 
   // For getting the getUserPlaylists from the context store
-  const { getUserPlaylists } = useContext(SpotifyApiData);
-
-  // State for managing the search in the input bar
-  const [search, setSearch] = useState("");
+  const { getUserPlaylists, search } = useContext(SpotifyApiData);
 
   // State for managing the search results and using them in the Middle
   const [searchResults, setSearchResults] = useState([]);
@@ -65,8 +62,6 @@ const Middle = () => {
       } items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]`}
     >
       <Search
-        search={search}
-        setSearch={setSearch}
         setSearchResults={setSearchResults}
         setSearchPlaylists={setSearchPlaylists}
         setSearchArtists={setSearchArtists}
