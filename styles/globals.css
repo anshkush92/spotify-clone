@@ -40,6 +40,14 @@
     @apply bg-[#7d7d7d] w-full ring-0 border-transparent;
   }
 
+  .player-icons {
+    @apply text-xl hover:text-white;
+  }
+
+  .player-icons-play-pause {
+    @apply text-4xl hover:text-white hover:scale-110 transition-all duration-200 ease-in-out;
+  }
+
   .scrollbar::-webkit-scrollbar {
     display: none;
     width: 10px;
