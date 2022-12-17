@@ -24,7 +24,7 @@ const Middle = () => {
   } = useContext(SpotifyApiData);
 
   // State for managing the search results and using them in the Middle
-  const { playlists, albums } = state;
+  const { playlists, albums, artists, songs } = state;
 
   // Only need to run 1 time, when the component is mounted
   useEffect(() => {
@@ -33,12 +33,15 @@ const Middle = () => {
       (response) => {
         console.log(response.body);
         getUserPlaylists(
-          response.body.items.map((userPlaylist) => {
+          response.body.items.map((playlist) => {
             return {
-              name: userPlaylist.name,
-              id: userPlaylist.id,
-              image: userPlaylist.images[0]?.url,
-              uri: userPlaylist.external_urls?.spotify,
+              id: playlist.id,
+              name: playlist.name,
+              image: playlist.images[0]?.url,
+              uri: playlist.external_urls?.spotify,
+              tracks: playlist.tracks?.total,
+              owner: playlist.owner?.display_name,
+              ownerProfile: playlist.owner.external_urls?.spotify,
             };
           })
         );
@@ -133,10 +136,10 @@ const Middle = () => {
 
       {search && (
         <>
-          <Tracks>Songs</Tracks>
+          <Tracks songs={songs}>Songs</Tracks>
           <Common data={albums}>Albums</Common>
           <Common data={playlists}>Playlists</Common>
-          <Artist></Artist>
+          <Artist artists={artists}></Artist>
         </>
       )}
       <hr className="divider"></hr>

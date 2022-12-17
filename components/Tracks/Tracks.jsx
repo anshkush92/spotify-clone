@@ -1,14 +1,7 @@
-import { useContext } from "react";
-
-import SpotifyApiData from "../../context/SpotifyApiData";
-
 import convertTime from "../../utils/convertTime";
 /* eslint-disable @next/next/no-img-element */
 
-const Tracks = ({ children }) => {
-  const { state } = useContext(SpotifyApiData);
-  const { songs } = state;
-
+const Tracks = ({ songs, children }) => {
   return (
     <div className="text-white w-full">
       <span className="card-title ">{children}</span>

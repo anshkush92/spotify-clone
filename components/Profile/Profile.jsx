@@ -10,7 +10,11 @@ import Player from "../../context/Player";
 const Profile = () => {
   // For getting the User's Profile from the Spotify API using Context API
   const { user } = useContext(SpotifyApi);
-  const { id, name, image, email } = user;
+  // const { id, name, image, email } = user;
+  const id = user?.id;
+  const name = user?.name;
+  const image = user?.image;
+  const email = user?.email;
 
   // For toggling the Dropdown
   const { isProfileOpen, toggleProfileDropdown } = useContext(Player);
@@ -18,7 +22,7 @@ const Profile = () => {
   return (
     <div className="text-white relative">
       <button
-        className="bg-[#373636] rounded-full h-8"
+        className="bg-[#373636] rounded-full h-8 w-max"
         onClick={toggleProfileDropdown}
       >
         <div className="flex flex-row items-center justify-start gap-x-2 px-1">

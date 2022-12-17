@@ -1,12 +1,5 @@
-import { useContext } from "react";
-
-import SpotifyApiData from "../../../../../../context/SpotifyApiData";
-
 /* eslint-disable @next/next/no-img-element */
-const Artist = () => {
-  const { state } = useContext(SpotifyApiData);
-  const { artists } = state;
-
+const Artist = ({ artists }) => {
   return (
     <>
       <p className="card-title">Artists</p>

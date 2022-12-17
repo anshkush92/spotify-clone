@@ -1,14 +1,15 @@
 import { useContext } from "react";
+import Left from "../../components/Dashboard/SideBar/Left/Left";
+
+import Artist from "../../components/Dashboard/SideBar/Middle/Cards/Artist/Artist";
+import Player from "../../components/Player/Player";
+import CollectionProfile from "../../components/Header/Collection-Profile/CollectionProfile";
+
 import SpotifyApiData from "../../context/SpotifyApiData";
 
-import Tracks from "../../components/Tracks/Tracks";
-import Left from "../../components/Dashboard/SideBar/Left/Left";
-import CollectionProfile from "../../components/Header/Collection-Profile/CollectionProfile";
-import Player from "../../components/Player/Player";
-
-const TracksPage = () => {
+const ArtistsPage = () => {
   const { state } = useContext(SpotifyApiData);
-  const { userSongs } = state;
+  const { userArtists } = state;
 
   return (
     <div>
@@ -17,11 +18,11 @@ const TracksPage = () => {
         className={`ml-60 flex flex-col flex-grow py-6 justify-center gap-y-8 items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]`}
       >
         <CollectionProfile></CollectionProfile>
-        <Tracks songs={userSongs}>Liked Songs</Tracks>
+        <Artist artists={userArtists}></Artist>
       </section>
       <Player></Player>
     </div>
   );
 };
 
-export default TracksPage;
+export default ArtistsPage;

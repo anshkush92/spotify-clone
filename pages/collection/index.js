@@ -1,7 +1,21 @@
 import React from "react";
 
-const Collection = () => {
-  return <div>Collection</div>;
+import Left from "../../components/Dashboard/SideBar/Left/Left";
+import CollectionProfile from "../../components/Header/Collection-Profile/CollectionProfile";
+import Player from "../../components/Player/Player";
+
+const CollectionPage = () => {
+  return (
+    <div>
+      <Left></Left>
+      <section
+        className={`ml-60 flex flex-col flex-grow py-6 justify-center gap-y-8 items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]`}
+      >
+        <CollectionProfile></CollectionProfile>
+      </section>
+      <Player></Player>
+    </div>
+  );
 };
 
-export default Collection;
+export default CollectionPage;

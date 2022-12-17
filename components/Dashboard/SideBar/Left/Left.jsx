@@ -28,7 +28,7 @@ const Left = () => {
       <Desktop icon={<AiOutlineSearch></AiOutlineSearch>} navLink="/">
         Search
       </Desktop>
-      <Desktop icon={<BiLibrary></BiLibrary>} navLink="/collection">
+      <Desktop icon={<BiLibrary></BiLibrary>} navLink="/collection/tracks">
         Your Library
       </Desktop>
 
