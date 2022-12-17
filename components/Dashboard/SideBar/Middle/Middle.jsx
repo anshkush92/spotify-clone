@@ -7,7 +7,6 @@ import Search from "./Search/Search";
 import Common from "./Cards/Common/Common";
 import Artist from "./Cards/Artist/Artist";
 import Browse from "./Cards/Browse/Browse";
-import Home from "./Cards/Home/Home";
 import Tracks from "../../../Tracks/Tracks";
 
 const Middle = () => {
@@ -15,12 +14,10 @@ const Middle = () => {
   const { spotifyApi } = useContext(SpotifyApi);
 
   // For getting the getUserPlaylists from the context store
-  const { getUserPlaylists, search } = useContext(SpotifyApiData);
+  const { getUserPlaylists, search, state } = useContext(SpotifyApiData);
 
   // State for managing the search results and using them in the Middle
-  const [searchArtists, setSearchArtists] = useState([]);
-  const [searchPlaylists, setSearchPlaylists] = useState([]);
-  const [newRelease, setNewRelease] = useState([]);
+  const { playlists, albums } = state;
 
   // Only need to run 1 time, when the component is mounted
   useEffect(() => {
@@ -45,40 +42,22 @@ const Middle = () => {
     );
   }, [spotifyApi, getUserPlaylists]);
 
-  // To check whether we are getting the correct results or not from the spotify API
-  console.log(
-    `Query ${search}`,
-    searchResults,
-    searchPlaylists,
-    searchArtists,
-    newRelease
-  );
-
   return (
     <section
       className={`ml-60 flex flex-col flex-grow py-6 justify-center ${
         search ? "gap-y-5" : "gap-y-8"
       } items-start  pl-[calc(240px_-_232px)] pr-[calc(240px_-_216px)]`}
     >
-      <Search
-        setSearchPlaylists={setSearchPlaylists}
-        setSearchArtists={setSearchArtists}
-        setNewRelease={setNewRelease}
-      ></Search>
+      <Search></Search>
 
       {!search && <Browse></Browse>}
 
       {search && (
         <>
           <Tracks>Songs</Tracks>
-          <Common data={newRelease} type="playlists">
-            Albums
-          </Common>
-          <Common data={searchPlaylists} type="playlists">
-            Playlists
-          </Common>
-          <Artist data={searchArtists}></Artist>
-          <Home></Home>
+          <Common data={albums}>Albums</Common>
+          <Common data={playlists}>Playlists</Common>
+          <Artist></Artist>
         </>
       )}
       <hr className="divider"></hr>

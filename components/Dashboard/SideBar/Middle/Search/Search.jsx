@@ -8,20 +8,21 @@ import Profile from "../../../../Profile/Profile";
 import SpotifyApi from "../../../../../context/SpotifyApi";
 import SpotifyApiData from "../../../../../context/SpotifyApiData";
 
-const Search = (props) => {
+const Search = () => {
   // Context API for getting the SPOTIFY API and the ACCESS TOKEN
   const { spotifyApi, accessToken } = useContext(SpotifyApi);
 
   // Context API for using the function to make state changes in Spotify Data state
-  const { getSongs, search, handleSearch, removeSearch, getCategories } =
-    useContext(SpotifyApiData);
-
   const {
-    setSearchResults,
-    setSearchPlaylists,
-    setSearchArtists,
-    setNewRelease,
-  } = props;
+    getSongs,
+    search,
+    handleSearch,
+    removeSearch,
+    getCategories,
+    getArtists,
+    getAlbums,
+    getPlaylists,
+  } = useContext(SpotifyApiData);
 
   // This useEffect() runs every time the accessToken, search or spotifyApi changes as it is mentioned in the dependency array
   useEffect(() => {
@@ -46,7 +47,7 @@ const Search = (props) => {
       );
     }
 
-    if (!accessToken || !search) return setSearchPlaylists([]);
+    if (!accessToken || !search) return getPlaylists([]);
 
     // Using the promises to search for Name, Album, Artists
     spotifyApi.searchTracks(search).then(
@@ -74,7 +75,7 @@ const Search = (props) => {
     // Using the promises to search for Artists
     spotifyApi.searchArtists(search).then(
       (response) => {
-        setSearchArtists(
+        getArtists(
           response.body.artists.items.map((artist) => {
             return {
               id: artist.id,
@@ -96,7 +97,7 @@ const Search = (props) => {
     spotifyApi.searchPlaylists(search).then(
       (response) => {
         // Getting the results of the search from the spotify API
-        setSearchPlaylists(
+        getPlaylists(
           response.body.playlists.items.map((playlist) => {
             return {
               id: playlist.id,
@@ -118,7 +119,7 @@ const Search = (props) => {
     spotifyApi.getNewReleases().then(
       (response) => {
         // console.log(response);
-        setNewRelease(
+        getAlbums(
           response.body.albums.items?.map((newRelease) => {
             return {
               name: newRelease.name,
@@ -141,9 +142,9 @@ const Search = (props) => {
     spotifyApi,
     getSongs,
     getCategories,
-    setSearchPlaylists,
-    setSearchArtists,
-    setNewRelease,
+    getAlbums,
+    getArtists,
+    getPlaylists,
   ]);
 
   return (

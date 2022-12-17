@@ -1,12 +1,17 @@
-import React from "react";
+import { useContext } from "react";
+
+import SpotifyApiData from "../../../../../../context/SpotifyApiData";
 
 /* eslint-disable @next/next/no-img-element */
-const Artist = ({ data }) => {
+const Artist = () => {
+  const { state } = useContext(SpotifyApiData);
+  const { artists } = state;
+
   return (
     <>
       <p className="card-title">Artists</p>
       <div className="grid-container">
-        {data.map(({ id, name, image, followers, artistProfile }) => (
+        {artists.map(({ id, name, image, followers, artistProfile }) => (
           <a
             key={id}
             href={artistProfile}

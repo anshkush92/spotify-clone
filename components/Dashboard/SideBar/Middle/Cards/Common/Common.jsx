@@ -2,9 +2,7 @@ import React from "react";
 
 /* eslint-disable @next/next/no-img-element */
 
-const Common = ({ data, children, type }) => {
-  // *Importing the playState from the Recoil and descructuring it similar to useState
-
+const Common = ({ data, children }) => {
   // Mapping of the data for the Playlists Section
   const typePlaylists = data.map(({ id, owner, image, name, tracks, uri }) => (
     <a key={id} href={uri} target="_blank" rel="noreferrer">
