@@ -9,8 +9,8 @@ const Dashboard = () => {
 
   return (
     <main>
-      <Left userPlaylist={userPlaylist}></Left>
-      <Middle setUserPlaylist={setUserPlaylist}></Middle>
+      <Left></Left>
+      <Middle></Middle>
     </main>
   );
 };

@@ -1,9 +1,13 @@
-import React from "react";
+import { useContext } from "react";
+import SpotifyApiData from "../../../../../context/SpotifyApiData";
 
-const Playlist = ({ userPlaylist }) => {
+const Playlist = () => {
+  const { state } = useContext(SpotifyApiData);
+  const { userPlaylists } = state;
+
   return (
     <div className="overflow-y-scroll flex flex-col gap-y-4 h-52 text-base cursor-default scrollbar truncate overflow-x-hidden">
-      {userPlaylist?.map(({ name, id, uri }) => (
+      {userPlaylists?.map(({ name, id, uri }) => (
         <div key={id} className="hover:text-white">
           <a
             href={uri}

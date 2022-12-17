@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import { useContext } from "react";
 
 import Desktop from "./Navigation/Desktop";
 import Playlist from "./Playlist/Playlist";
@@ -9,7 +9,7 @@ import { AiFillHome, AiOutlineSearch, AiTwotoneHeart } from "react-icons/ai";
 import { BiLibrary } from "react-icons/bi";
 import { MdAddBox } from "react-icons/md";
 
-const Left = ({ userPlaylist }) => {
+const Left = () => {
   return (
     <section className="w-56 fixed z-50 bg-black/100 text-[#7D7D7D] h-screen top-0 flex flex-col px-4 gap-y-4 sm:flex-shrink">
       <div className="flex flex-row items-center w-fit cursor-pointer justify-start h-20 -ml-2.5 pt-4 gap-x-2">
@@ -46,7 +46,7 @@ const Left = ({ userPlaylist }) => {
 
       <hr className="divider"></hr>
 
-      <Playlist userPlaylist={userPlaylist}></Playlist>
+      <Playlist></Playlist>
       <InstallApp></InstallApp>
     </section>
   );

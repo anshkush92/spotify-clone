@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 
 import SpotifyApi from "../../../../context/SpotifyApi";
+import SpotifyApiData from "../../../../context/SpotifyApiData";
 
 import Search from "./Search/Search";
 import Common from "./Cards/Common/Common";
@@ -9,9 +10,12 @@ import Browse from "./Cards/Browse/Browse";
 import Home from "./Cards/Home/Home";
 import Tracks from "../../../Tracks/Tracks";
 
-const Middle = ({ setUserPlaylist }) => {
+const Middle = () => {
   // For getting the spotify APi from the context store
   const { spotifyApi } = useContext(SpotifyApi);
+
+  // For getting the getUserPlaylists from the context store
+  const { getUserPlaylists } = useContext(SpotifyApiData);
 
   // State for managing the search in the input bar
   const [search, setSearch] = useState("");
@@ -28,7 +32,7 @@ const Middle = ({ setUserPlaylist }) => {
     spotifyApi.getUserPlaylists().then(
       (response) => {
         console.log(response.body);
-        setUserPlaylist(
+        getUserPlaylists(
           response.body.items.map((userPlaylist) => {
             return {
               name: userPlaylist.name,
@@ -43,7 +47,7 @@ const Middle = ({ setUserPlaylist }) => {
         console.log(err);
       }
     );
-  }, [spotifyApi, setUserPlaylist]);
+  }, [spotifyApi, getUserPlaylists]);
 
   // To check whether we are getting the correct results or not from the spotify API
   console.log(
