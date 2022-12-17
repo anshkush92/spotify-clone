@@ -1,15 +1,8 @@
 import React from "react";
 
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/router";
 
 const Dropdown = ({ closeProfile, userId }) => {
-  const router = useRouter();
-
-  const handleLogout = () => {
-    signOut({ redirect: true });
-    router.replace("/auth/signin");
-  };
   return (
     <div
       className="absolute bg-[#201f1f] p-2 rounded-md flex flex-col gap-y-1 w-max right-0"
@@ -49,7 +42,13 @@ const Dropdown = ({ closeProfile, userId }) => {
         <div>Settings</div>
       </a>
       <hr></hr>
-      <div onClick={handleLogout}>Logout</div>
+      <div
+        onClick={() => {
+          signOut({ redirect: false });
+        }}
+      >
+        Logout
+      </div>
     </div>
   );
 };

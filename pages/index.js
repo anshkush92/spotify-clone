@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 
 import Loader from "../components/Loader/Loader";
 import Dashboard from "../components/Dashboard/Dashboard";
-import Profile from "../components/Profile/Profile";
 import Player from "../components/Player/Player";
 
 // Don't forget to add the redirect URI to the spotify developer dashboard, otherwise you won't be able to login with spoitfy

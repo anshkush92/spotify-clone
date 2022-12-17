@@ -10,11 +10,7 @@ import Player from "../../context/Player";
 const Profile = () => {
   // For getting the User's Profile from the Spotify API using Context API
   const { user } = useContext(SpotifyApi);
-  // const { id, name, image, email } = user;
-  const id = user?.id;
-  const name = user?.name;
-  const image = user?.image;
-  const email = user?.email;
+  const { id, name, image, email } = user;
 
   // For toggling the Dropdown
   const { isProfileOpen, toggleProfileDropdown } = useContext(Player);
