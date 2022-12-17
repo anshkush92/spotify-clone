@@ -1,12 +1,18 @@
 import { useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { useSession } from "next-auth/react";
 
 import Dropdown from "./Dropdown";
 
 /* eslint-disable @next/next/no-img-element */
 const Profile = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const { data: session } = useSession();
+  const { user } = session;
+  console.log(session);
+  const { id, name, image, email } = user;
 
   return (
     <div className="text-white relative">
@@ -16,13 +22,16 @@ const Profile = () => {
       >
         <div className="flex flex-row items-center justify-start gap-x-2 px-1">
           <img
-            src="https://res.cloudinary.com/dicbnntfh/image/upload/v1670681049/spotify-clone/playlistCover_jestk7.jpg"
-            alt="User Profile"
-            height={25}
-            width={25}
-            style={{ borderRadius: "100%" }}
+            src={image}
+            alt={email}
+            style={{
+              height: "25px",
+              width: "25px",
+              borderRadius: "50%",
+            }}
           ></img>
-          <span className="text-sm font-bold">Profile</span>
+
+          <span className="text-sm font-bold">{name}</span>
           <div>
             {isProfileOpen ? (
               <BsChevronUp></BsChevronUp>
@@ -32,7 +41,9 @@ const Profile = () => {
           </div>
         </div>
       </button>
-      {isProfileOpen && <Dropdown closeProfile={setIsProfileOpen}></Dropdown>}
+      {isProfileOpen && (
+        <Dropdown closeProfile={setIsProfileOpen} userId={id}></Dropdown>
+      )}
     </div>
   );
 };

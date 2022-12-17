@@ -114,7 +114,7 @@ const Search = (props) => {
 
     spotifyApi.getNewReleases().then(
       (response) => {
-        console.log(response);
+        // console.log(response);
         setNewRelease(
           response.body.albums.items?.map((newRelease) => {
             return {
